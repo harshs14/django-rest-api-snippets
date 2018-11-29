@@ -2,7 +2,7 @@ from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from snippets import views
 from rest_framework.schemas import get_schema_view
-from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 
 schema_view = get_schema_view(title='Pastebin API')
@@ -17,4 +17,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('schema/', schema_view),
     re_path(r'^api-token-auth/', obtain_jwt_token),
+    re_path(r'^api-token-refresh/', refresh_jwt_token),
+    re_path(r'^api-token-verify/', verify_jwt_token),
 ]
+
